@@ -19,6 +19,8 @@ class CreateAssociazioneFornaiTable extends Migration {
 			$table->integer('fornaio_id');
 			$table->integer('gas_id');
 			$table->integer('giorno');
+			$table->date('valido_dal')->nullable();
+			$table->date('valido_al')->nullable();
 			$table->timestamps();
 		});
 	}

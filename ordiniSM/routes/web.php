@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\OrdiniController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +20,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::resource("ordini","OrdiniController");
+

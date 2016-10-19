@@ -15,7 +15,8 @@ class CreateProdottiTable extends Migration {
 		Schema::create('prodotti', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('ordini_id');
+			$table->integer('ordine_id');
+			$table->integer('fornitore_id');
 			$table->enum('tipo', array('pane','farina','granella','altro'));
 			$table->string('descrizione');
 			$table->string('quantita');

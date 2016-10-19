@@ -26,4 +26,13 @@ class User extends Authenticatable
 	protected $hidden = [
 			'password', 'remember_token',
 	];
+	
+	public function referenza(){
+		return $this->belongsTo('App\Model\Attore','attore_id');
+	}
+	
+	public function gas(){
+		return $this->belongsTo('App\Model\Gas');
+	}
+	
 }

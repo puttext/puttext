@@ -19,7 +19,7 @@ class CreateOrdiniTable extends Migration {
 			$table->date('consegna');
 			$table->date('apertura');
 			$table->date('chiusura');
-			$table->date('fornitore_id');
+			$table->integer('fornitore_id');
 			$table->timestamps();
 		});
 	}

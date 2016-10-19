@@ -11,9 +11,10 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="{{asset('css/app.css')}}" rel="stylesheet">
 
     <!-- Scripts -->
+    <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -41,12 +42,22 @@
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;
+						@if (Auth::user()->ruolo=="fornitore")
+							<li><a href="{{ url('/ordini/') }}">Storico ordini</a></li>
+						@elseif (\Auth::user()->ruolo!='referente')
+							<li><a href="{{ url('/ordini/create') }}">Crea nuovo ordine</a></li>
+							<li><a href="{{ url('/ordini/') }}">Modifica Ordini</a></li>
+						@endif
+						@if (Auth::user()->gas_id)
+							<li><a href="{{ url('/ordini/current/edit') }}">Compila Ordine</a></li>
+							<li><a href="{{ url('/ordini/') }}">Storico ordini GAS</a></li>
+						@endif
+						@if (Auth::user()->ruolo!='fornitore' || \Auth::user()->gas_id)
+							<li><a href="{{ url('/contributi') }}">Verifica Contributi</a></li>
+						@endif
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
@@ -55,16 +66,16 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    Ciao, {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                	<li>{{ strtoupper(Auth::user()->ruolo)}}</li>
+                                	@if (Auth::user()->gas_id)
+                                		<li>GAS: {{ Auth::user()->gas->nome}}</li>
+                                	@endif
                                     <li>
-                                        <a href="{{ url('/logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                                        <a id="logout" href="#">Logout</a>
 
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
@@ -81,7 +92,13 @@
         @yield('content')
     </div>
 
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#logout").click(function(){
+				$('#logout-form').submit();
+			});
+		});
+	</script>
+	@yield('page-scripts')
 </body>
 </html>

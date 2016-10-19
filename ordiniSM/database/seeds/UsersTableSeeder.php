@@ -15,25 +15,24 @@ class UsersTableSeeder extends Seeder
         \DB::table('users')->delete();
         
         \DB::table('users')->insert(array (
-            0 => 
             array (
                 'id' => 1,
                 'name' => 'referente 1',
                 'email' => 'referente1@gmail.com',
                 'password' => bcrypt('gas1'),
-                'ruolo' => 'gas',
-                'attore_id' => 4,
+                'ruolo' => 'referente',
+                'attore_id' => null,
+                'gas_id' => 4,
             ),
-            1 => 
             array (
                 'id' => 2,
                 'name' => 'referente 2',
                 'email' => 'referente2@livecom.it',
                 'password' => bcrypt('gas2'),
-                'ruolo' => 'gas',
-                'attore_id' => 5,
+                'ruolo' => 'referente',
+                'attore_id' => null,
+            	'gas_id' => 5,
             ),
-            2 => 
             array (
                 'id' => 3,
                 'name' => 'Massimo Bertin',
@@ -41,6 +40,16 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('massimo'),
                 'ruolo' => 'gas',
                 'attore_id' => 1,
+                'gas_id' => null,
+            ),
+            array (
+                'id' => 4,
+                'name' => 'Stefano Radaelli',
+                'email' => 'stradael@livecom.it',
+                'password' => bcrypt('stefano'),
+                'ruolo' => 'coordinatore',
+                'attore_id' => 1,
+                'gas_id' => 1,
             ),
         ));
         
