@@ -16,6 +16,7 @@ class CreateOrdiniTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('stagione', 9);
+			$table->string('codice_gruppo', 8);
 			$table->date('consegna');
 			$table->date('apertura');
 			$table->date('chiusura');

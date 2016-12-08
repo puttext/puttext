@@ -96,6 +96,7 @@ class OrdiniController extends Controller
 	        				$dumper->dump($data);
 	        				$ordine=Ordine::create([
 	        					"stagione"=>\Config::get("parametri.stagione"),
+	        					"codice_gruppo"=>"P".$giorno."-".$anno."-".sprintf('%02d',$mese),
 	        					"consegna"=>$data,
 	        					"apertura"=>$apertura,
 	        					"chiusura"=>$chiusura,
@@ -113,6 +114,7 @@ class OrdiniController extends Controller
 	        		}
         		}
         	}
+        	return redirect("ordini/pane/$anno/$mese/edit/");
         }
     }
 
@@ -160,4 +162,5 @@ class OrdiniController extends Controller
     {
         //
     }
+    
 }

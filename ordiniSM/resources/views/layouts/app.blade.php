@@ -43,17 +43,17 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <ul class="nav navbar-nav">
-						@if (Auth::user()->ruolo=="fornitore")
+						@if (Auth::user() && Auth::user()->ruolo=="fornitore")
 							<li><a href="{{ url('/ordini/') }}">Storico ordini</a></li>
-						@elseif (\Auth::user()->ruolo!='referente')
+						@elseif (Auth::user() && \Auth::user()->ruolo!='referente')
 							<li><a href="{{ url('/ordini/create') }}">Crea nuovo ordine</a></li>
 							<li><a href="{{ url('/ordini/') }}">Modifica Ordini</a></li>
 						@endif
-						@if (Auth::user()->gas_id)
+						@if (Auth::user() && Auth::user()->gas_id)
 							<li><a href="{{ url('/ordini/current/edit') }}">Compila Ordine</a></li>
 							<li><a href="{{ url('/ordini/') }}">Storico ordini GAS</a></li>
 						@endif
-						@if (Auth::user()->ruolo!='fornitore' || \Auth::user()->gas_id)
+						@if (Auth::user() && (Auth::user()->ruolo!='fornitore' || \Auth::user()->gas_id))
 							<li><a href="{{ url('/contributi') }}">Verifica Contributi</a></li>
 						@endif
                     </ul>
