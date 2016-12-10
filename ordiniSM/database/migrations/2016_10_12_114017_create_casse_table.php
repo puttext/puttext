@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterTableOrdini extends Migration
+class CreateCasseTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AlterTableOrdini extends Migration
      */
     public function up()
     {
-        Schema::table('ordini', function (Blueprint $table) {
-			$table->string('codice_gruppo', 10);
+        Schema::create('casse', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +26,6 @@ class AlterTableOrdini extends Migration
      */
     public function down()
     {
-        Schema::table('ordini', function (Blueprint $table) {
-			$table->dropColumn('codice_gruppo');
-        });
+        Schema::dropIfExists('casse');
     }
 }

@@ -43,6 +43,9 @@ class AppServiceProvider extends ServiceProvider
 				\Log::debug($query->sql,["parametri"=> $query->bindings, "time" => $query->time]);
 			});
 		}
+		
+		//\Carbon\Carbon::setLocale("it.utf8");
+		setlocale(LC_TIME, "it_IT.utf8");
     	//
     }
 

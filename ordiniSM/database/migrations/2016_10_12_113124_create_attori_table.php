@@ -15,6 +15,7 @@ class CreateAttoriTable extends Migration {
 		Schema::create('attori', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->integer('referente_id')->nullable();
 			$table->enum('tipo', array('gas','fornaio','mugnaio','contadino'));
 			$table->string('nome', 20);
 			$table->string('comune', 30);

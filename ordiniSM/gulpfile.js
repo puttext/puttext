@@ -16,4 +16,5 @@ const elixir = require('laravel-elixir');
 elixir(mix => {
     mix.sass('app.scss')
        .webpack('app.js');
+    mix.copy('node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css','public/css/bootstrap-datepicker3.min.css')
 });

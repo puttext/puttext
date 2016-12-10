@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link href="{{asset('css/bootstrap-datepicker3.min.css')}}" rel="stylesheet">
 
     <!-- Scripts -->
     <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
@@ -72,7 +73,7 @@
                                 <ul class="dropdown-menu" role="menu">
                                 	<li>{{ strtoupper(Auth::user()->ruolo)}}</li>
                                 	@if (Auth::user()->gas_id)
-                                		<li>GAS: {{ Auth::user()->gas->nome}}</li>
+                                		<li>GAS: {{ Auth::user()->gas ? Auth::user()->gas->nome : ""}}</li>
                                 	@endif
                                     <li>
                                         <a id="logout" href="#">Logout</a>

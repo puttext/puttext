@@ -28,20 +28,7 @@ class OrdiniController extends Controller
      */
     public function create()
     {
-    	$this->dati["mesi"]=[
-    		0=>"",
-    		1=>"Gennaio",
-    		2=>"Febbraio",
-    		3=>"Marzo",
-    		4=>"Aprile",
-    		5=>"Maggio",
-    		6=>"Giugno",
-    		7=>"Luglio",
-    		9=>"Settembre",
-    		10=>"Ottobre",
-    		11=>"Novembre",
-    		12=>"Dicembre",
-    	];
+    	$this->dati["mesi"]=\Config::get("parametri.mesi_txt");
     	$data=new \Carbon\carbon();
     	if ($data->month=="12")
     		$this->dati["anno"]=$data->year+1;
@@ -61,6 +48,7 @@ class OrdiniController extends Controller
         $dumper=(new Dumper);
         if ($request->has("pane")){
         	$mese=$request->input("mese");
+        	$mese_f=sprintf('%02d',$mese);
         	$anno=$request->input("anno");
         	$fornai=[];
         	if (\Auth::user()->ruolo=="coordinatore"){
@@ -74,13 +62,14 @@ class OrdiniController extends Controller
         	$dumper->dump($mese);
         	$dumper->dump($anno);
         	foreach ($fornai as $fornaio){
-        		$dumper->dump($fornaio, $fornaio->giorni_gas);
+        		$dumper->dump($fornaio);
+        		$dumper->dump($fornaio->giorni_gas);
         		if ($fornaio->giorni_gas){
-        			$dumper->dump($fornaio);
+        			//$dumper->dump($fornaio);
 	        		$giorni=$fornaio->giorni_gas()
 	        			->whereStagione(\Config::get("parametri.stagione"))
-	        			->where("valido_dal","<=",$anno."-".$mese)
-	        			->where("valido_al",">=",$anno."-".$mese)->get()
+	        			->where("valido_dal","<=",$anno."-".$mese_f)
+	        			->where("valido_al",">=",$anno."-".$mese_f)->get()
 	        			->pluck("giorno")->unique();
 	        		$dumper->dump($giorni);
 	        		foreach ($giorni as $giorno){
@@ -96,10 +85,11 @@ class OrdiniController extends Controller
 	        				$dumper->dump($data);
 	        				$ordine=Ordine::create([
 	        					"stagione"=>\Config::get("parametri.stagione"),
-	        					"codice_gruppo"=>"P".$giorno."-".$anno."-".sprintf('%02d',$mese),
+	        					"codice_gruppo"=>"P".$giorno."-".$anno."-".$mese_f,
 	        					"consegna"=>$data,
 	        					"apertura"=>$apertura,
 	        					"chiusura"=>$chiusura,
+	        					"descrizione"=>"Ordine pane " . config("parametri.mesi_txt")[$mese] . " " . $anno,
 	        					"fornitore_id"=>$fornaio->id
 	        				]);
 	        				

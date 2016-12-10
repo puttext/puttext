@@ -17,6 +17,7 @@ class CreateOrdiniDettagliTable extends Migration {
 			$table->increments('id');
 			$table->integer('prodotto_id');
 			$table->integer('gas_id');
+			$table->integer('quantita');
 			$table->timestamps();
 		});
 	}

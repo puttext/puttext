@@ -8,9 +8,11 @@ window._ = require('lodash');
  */
 
 window.$ = window.jQuery = require('jquery');
+require('moment');
 require('bootstrap-sass');
 require('bootstrap-select');
-require('bootstrap-datetimepicker');
+require('bootstrap-datepicker');
+require('bootstrap-datetimepicker-sass');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
