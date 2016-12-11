@@ -4,7 +4,7 @@
 <div class="container">
 	{!! Form::open([
 		'method' => 'POST', 
-		'url' => URL::to('pane/'.$anno."/".$mese),
+		'url' => URL::to('ordini/pane/'.$anno."/".$mese),
 		'class' => 'form-vertical',
 	]) !!}
     <!-- <div class="row"> -->

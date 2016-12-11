@@ -35,4 +35,12 @@ class User extends Authenticatable
 		return $this->belongsTo('App\Model\Gas');
 	}
 	
+	public function getLivelloAttribute(){
+		switch ($this->ruolo){
+			case "coordinatore": return 20; break;
+			case "gestore": return 30; break;
+			case "admin": return 90; break;
+			default: return 10; 
+		}
+	}
 }

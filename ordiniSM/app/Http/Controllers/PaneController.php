@@ -14,6 +14,7 @@ class PaneController extends Controller
     public function edit($anno,$mese){
     	//dd(\App::getLocale());
     	//dd(setlocale(LC_ALL, 0));
+    	$mese=(int)$mese;
     	$mese_f=sprintf('%02d',$mese);
     	$fornai=[];
     	if (\Auth::user()->ruolo=="coordinatore"){
@@ -104,6 +105,6 @@ class PaneController extends Controller
 	        	]);
     		}
     	}
-		return redirect("pane/$anno/$mese/edit/");
+		return redirect("ordini/pane/$anno/$mese/edit/");
     }
 }

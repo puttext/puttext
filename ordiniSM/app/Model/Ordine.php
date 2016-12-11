@@ -13,4 +13,11 @@ class Ordine extends BaseModel
 	
 	protected $dates = [self::CREATED_AT,self::UPDATED_AT,"consegna","apertura","chiusura"];
 	
+	public function fornitore(){
+		return $this->belongsTo('App\Model\Attore','fornitore_id');
+	}
+	
+	public function prodotti(){
+		return $this->hasMany('App\Model\Prodotto');
+	}
 }

@@ -10,9 +10,14 @@ class Gas extends Attore
 		'tipo' => 'gas',
 	);
 
+	public function fornai(){
+		return $this->belongsToMany('App\Model\Fornaio','associazione_fornai','gas_id','fornaio_id')
+			->withPivot("giorno","stagione");
+	}
+	
 	public function newQuery($excludeDeleted = true) {
 		return parent::newQuery($excludeDeleted = true)
-		->where('tipo', '=', 'gas');
+			->where('tipo', '=', 'gas');
 	}
 	
 }

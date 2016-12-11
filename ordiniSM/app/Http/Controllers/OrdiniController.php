@@ -19,6 +19,47 @@ class OrdiniController extends Controller
      */
     public function index()
     {
+    	$gruppi=Ordine::all()->groupBy("codice_gruppo");
+
+    	$oggi=new \Carbon\Carbon();
+    	$this->dati["in_corso"]=array();
+    	$this->dati["prossimi"]=array();
+    	$this->dati["storico"]=array();
+    	 
+    	foreach ($gruppi as $codice_gruppo=>$ordini){
+    		$gruppo=array();
+    		foreach ($ordini[0]->toArray() as $key=>$value){
+    			$gruppo[$key]=$value;
+    		}
+    		$gruppo["apertura"]=$ordini[0]->apertura;
+    		$gruppo["chiusura"]=$ordini[0]->chiusura;
+    		
+    		$fornitori=array();
+    		$consegne=array();
+    		foreach ($ordini as $ordine){
+    			$consegne[]=$ordine->consegna->format("d/m");
+    			$fornitori[$ordine->fornitore_id]=$ordine->fornitore->nome;
+    		}
+    		$gruppo["fornitori"]=implode($fornitori,", ");
+    		
+    		$gruppo["consegne"]=implode($consegne,", ");
+    		
+    		if (substr($gruppo["codice_gruppo"],0,1)=="P")
+    			$gruppo["url"]=url('/ordini/pane/'.$ordini[0]->consegna->format("Y/m").'/edit');
+    		else
+    			$gruppo["url"]=url('/ordini/'.$gruppo['codice_gruppo'].'/edit');
+    		
+    		if ($ordini[0]->apertura>$oggi){
+    			$this->dati["prossimi"][]=$gruppo;
+    		}
+    		else{
+    			$this->dati["prossimi"][]=$gruppo;
+    		}
+    		//dd($ordini->pluck("consegna"));
+    	}
+    	//dd($this->dati);
+    	return view("ordini.elenco")->with($this->dati);
+    	
     }
 
     /**
@@ -58,12 +99,12 @@ class OrdiniController extends Controller
         		$fornai=Fornaio::all();
         	}
     		//(new Dumper)->dump($appuntamento);
-        	$dumper->dump($fornai);
+        	/*$dumper->dump($fornai);
         	$dumper->dump($mese);
-        	$dumper->dump($anno);
+        	$dumper->dump($anno);*/
         	foreach ($fornai as $fornaio){
-        		$dumper->dump($fornaio);
-        		$dumper->dump($fornaio->giorni_gas);
+        		/*$dumper->dump($fornaio);
+        		$dumper->dump($fornaio->giorni_gas);*/
         		if ($fornaio->giorni_gas){
         			//$dumper->dump($fornaio);
 	        		$giorni=$fornaio->giorni_gas()
@@ -71,7 +112,7 @@ class OrdiniController extends Controller
 	        			->where("valido_dal","<=",$anno."-".$mese_f)
 	        			->where("valido_al",">=",$anno."-".$mese_f)->get()
 	        			->pluck("giorno")->unique();
-	        		$dumper->dump($giorni);
+	        		//$dumper->dump($giorni);
 	        		foreach ($giorni as $giorno){
 	        			$refDate=\Carbon\Carbon::createFromDate($anno, $mese, 1)->subDay();
 	        			$data=clone $refDate;
@@ -79,10 +120,10 @@ class OrdiniController extends Controller
 	        			$data->next($giorno);
 	        			$chiusura=(clone $data);
 	        			$chiusura->subDay(2);
-	        			$dumper->dump($giorno);
-	        			$dumper->dump($data);
+	        			/*$dumper->dump($giorno);
+	        			$dumper->dump($data);*/
 	        			while ($data->month==$mese){
-	        				$dumper->dump($data);
+	        				//$dumper->dump($data);
 	        				$ordine=Ordine::create([
 	        					"stagione"=>\Config::get("parametri.stagione"),
 	        					"codice_gruppo"=>"P".$giorno."-".$anno."-".$mese_f,
@@ -127,7 +168,25 @@ class OrdiniController extends Controller
      */
     public function edit($id)
     {
-        //
+		if ($id=="current" || !$id){
+			//compila tutti gli ordini aperti
+			if (\Auth::user()->gas_id)
+				return $this->compila();
+			else
+				return view("errore")->with(["messaggio"=>"Nessun GAS di riferimento per cui compilare"]);
+		}
+		else {
+			$ordine=Ordine::find($id);
+			$oggi=new \Carbon\Carbon();
+			if ($ordine->apertura <= $oggi && $ordine->chiusura>=$oggi){
+				//compila singolo ordine
+				return $this->compila($id);
+			}
+			if ($ordine->apertura < $oggi && \Auth::user()->livello >= 20){
+				//edit singolo ordine
+			}
+		}
+    	
     }
 
     /**
@@ -152,5 +211,20 @@ class OrdiniController extends Controller
     {
         //
     }
-    
+
+    public function compila($id){
+		$oggi=new \Carbon\Carbon();    
+    	if ($id=="current" || !$id){
+    		$this->dati["gruppi"]=array();	
+
+    		$fornai=\Auth::user()->gas->fornai;
+    	   	$gruppi=Ordine::where("apertura","<=",$oggi)
+	    		->where("chiusura",">=",$oggi)
+	    		->whereIn("fornitore_id",$fornai->pluck("id")->all())
+	    		->get()
+	    		->groupBy("codice_gruppo");
+	    
+	    	return $gruppi;
+    	}
+    }
 }

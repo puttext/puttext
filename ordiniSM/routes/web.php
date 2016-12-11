@@ -21,5 +21,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::resource("ordini","OrdiniController");
-Route::get('/pane/{anno}/{mese}/edit', 'PaneController@edit');
-Route::post('/pane/{anno}/{mese}', 'PaneController@update');
+Route::get('ordini/pane/{anno}/{mese}/edit', 'PaneController@edit');
+Route::post('ordini/pane/{anno}/{mese}', 'PaneController@update');
