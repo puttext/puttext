@@ -16,6 +16,7 @@
 
     <!-- Scripts -->
     <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/jquery.are-you-sure.js')}}"></script>
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
@@ -75,6 +76,7 @@
                                 	@if (Auth::user()->gas_id)
                                 		<li>GAS: {{ Auth::user()->gas ? Auth::user()->gas->nome : ""}}</li>
                                 	@endif
+                                    <li><a id="edit" href="{{route('user.edit',\Auth::user()->id)}}">Modifica i tuoi dati</a>
                                     <li>
                                         <a id="logout" href="#">Logout</a>
 

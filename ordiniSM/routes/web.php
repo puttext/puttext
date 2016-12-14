@@ -13,13 +13,12 @@ use App\Http\Controllers\OrdiniController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
+Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
 Route::resource("ordini","OrdiniController");
+Route::resource("user","UserController");
 Route::get('ordini/pane/{anno}/{mese}/edit', 'PaneController@edit');
 Route::post('ordini/pane/{anno}/{mese}', 'PaneController@update');

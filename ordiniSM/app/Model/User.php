@@ -9,6 +9,10 @@ class User extends Authenticatable
 {
 	use Notifiable;
 
+	const COORDINATORE=20;
+	const GESTORE=30;
+	const ADMIN=90;
+	
 	/**
 	 * The attributes that are mass assignable.
 	 *
@@ -16,6 +20,7 @@ class User extends Authenticatable
 	 */
 	protected $fillable = [
 			'name', 'email', 'password',
+			'attore_id', 'referente_id'
 	];
 
 	/**
@@ -37,9 +42,9 @@ class User extends Authenticatable
 	
 	public function getLivelloAttribute(){
 		switch ($this->ruolo){
-			case "coordinatore": return 20; break;
-			case "gestore": return 30; break;
-			case "admin": return 90; break;
+			case "coordinatore": return self::COORDINATORE; break;
+			case "gestore": return self::GESTORE; break;
+			case "admin": return self::ADMIN; break;
 			default: return 10; 
 		}
 	}

@@ -38,11 +38,11 @@ class PaneController extends Controller
     				$refDate=\Carbon\Carbon::createFromDate($anno, $mese, 1)->subDay();
     				$data=clone $refDate;
     				$data->next($giorno);
-    				$riga["giorno"]=$data->formatLocalized("%A");
+    				$riga["giorno"]=$data->format("l"); $data->formatLocalized("%A");
 
     				$i=1;
     				$ordini=Ordine::whereFornitoreId($fornaio->id)
-    					->whereCodiceGruppo("P".$giorno."-".$anno."-".$mese_f)
+    					->whereCodiceGruppo("P-".$fornaio->id."-".$giorno."-".$anno."-".$mese_f)
     					->orderBy("consegna")
     					->get();
     				foreach ($ordini as $ordine){

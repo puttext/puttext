@@ -15,7 +15,7 @@ class Attore extends Model
 			->whereTipo('fornaio');
 	}
 	
-	public function getFullnameAtribute(){
-		return $this->ragione_sociale ." " . $this->nome;		
+	public function getFullnameAttribute(){
+		return $this->ragione_sociale ." (" . $this->nome.")";		
 	}
 }

@@ -20,4 +20,6 @@ class Ordine extends BaseModel
 	public function prodotti(){
 		return $this->hasMany('App\Model\Prodotto');
 	}
+	
+	
 }

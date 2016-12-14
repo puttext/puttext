@@ -16,7 +16,7 @@
                 <div class="panel-body">
                    	{!! Form::hidden("pane",true) !!}
                    	{!! Form::text("anno",$anno,["class"=>"Form-control"]) !!}
-                	{!! Form::select("mese",$mesi,null,['class'=>'selectpicker', 'data-none-selected-text'=>'-- Seleziona il mese']) !!}
+                	{!! Form::select("mese",$mesi,null,['class'=>'selectpicker', 'data-none-selected-text'=>'-- Seleziona il mese --']) !!}
                 	{!! Form::submit("Crea", ['class'=>'btn btn-primary']) !!}
                 </div>
             </div>

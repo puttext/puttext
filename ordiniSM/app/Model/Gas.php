@@ -20,4 +20,7 @@ class Gas extends Attore
 			->where('tipo', '=', 'gas');
 	}
 	
+	public function getFullNameAttribute(){
+		return $this->nome . " (" . $this->comune . ")";
+	}
 }

@@ -49,7 +49,7 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('stefano'),
                 'ruolo' => 'coordinatore',
                 'attore_id' => 1,
-                'gas_id' => 1,
+                'gas_id' => 4,
             ),
         ));
         

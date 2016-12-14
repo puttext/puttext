@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Debug\Dumper;
 
-use App\Http\Requests;
-use App\Model\Attore;
 use App\Model\Fornaio;
 use App\Model\Ordine;
+use App\Model\OrdineDettaglio;
 
 class OrdiniController extends Controller
 {
@@ -126,7 +125,7 @@ class OrdiniController extends Controller
 	        				//$dumper->dump($data);
 	        				$ordine=Ordine::create([
 	        					"stagione"=>\Config::get("parametri.stagione"),
-	        					"codice_gruppo"=>"P".$giorno."-".$anno."-".$mese_f,
+	        					"codice_gruppo"=>"P-".$fornaio->id ."-". $giorno."-".$anno."-".$mese_f,
 	        					"consegna"=>$data,
 	        					"apertura"=>$apertura,
 	        					"chiusura"=>$chiusura,
@@ -170,10 +169,10 @@ class OrdiniController extends Controller
     {
 		if ($id=="current" || !$id){
 			//compila tutti gli ordini aperti
-			if (\Auth::user()->gas_id)
-				return $this->compila();
+			if (\Auth::user()->gas_id && \Auth::user()->gas)
+				return $this->compila(null);
 			else
-				return view("errore")->with(["messaggio"=>"Nessun GAS di riferimento per cui compilare"]);
+				return view("errors.generic")->with(["messaggio"=>"Nessun GAS di riferimento per cui compilare"]);
 		}
 		else {
 			$ordine=Ordine::find($id);
@@ -198,7 +197,17 @@ class OrdiniController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+    	$prodotti=$request->input("prodotto");
+    	//dd($prodotti);
+    	foreach ($prodotti as $index=>$prodotto){
+    		$qta=$prodotto["quantita"];
+    		unset ($prodotto["quantita"]);
+    		$dettaglio=OrdineDettaglio::firstOrCreate($prodotto);
+    		$dettaglio->quantita=$qta;
+    		//dd($prodotto,$dettaglio);
+			$dettaglio->save();
+    	}
+		return redirect("ordini/current/edit/");
     }
 
     /**
@@ -222,9 +231,12 @@ class OrdiniController extends Controller
 	    		->where("chiusura",">=",$oggi)
 	    		->whereIn("fornitore_id",$fornai->pluck("id")->all())
 	    		->get()
-	    		->groupBy("codice_gruppo");
+	    		->groupBy("codice_gruppo")->all();
 	    
-	    	return $gruppi;
+	    	$this->dati["gruppi"]=$gruppi;
+	    	$this->dati["gas_id"]=\Auth::user()->gas_id;
+	    	//dd($gruppi);
+    		return view("ordini.compila_current")->with($this->dati);
     	}
     }
 }

@@ -3,11 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row">
-		@if (true)
+		@if (isset($compila))
 			<div class="alert alert-info">
 				<h3 class="text-center">
 					Ci sono ordini in corso
-					<a href="{{ url('/ordini/compila') }}" class="btn btn-success">Compila!</a>
+					<a href="{{ url('/ordini/current/edit') }}" class="btn btn-success">Compila!</a>
 				</h3> 
 			</div>
 		@endif
