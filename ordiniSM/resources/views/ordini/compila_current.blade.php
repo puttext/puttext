@@ -17,9 +17,6 @@
 			<h3 class="panel-title text-center col-md11">{{$ordini[0]->descrizione}} </h3>
 	    </div>
 		<div class="panel-body">
-		@if (substr($gruppo,0,1)=="PP")
-			@include ("ordini.pane_compila")
-		@else
 			@foreach ($ordini as $ordine)
 		        <div class="col-md-3">
 		            <div class="panel panel-info">
@@ -44,10 +41,9 @@
 		            </div>
 				</div>
 			@endforeach
-		@endif
+		</div>
 	</div>
 	@endforeach
-</div>
 	{!! Form::close() !!}
 </div>
 @endsection

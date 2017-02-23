@@ -51,6 +51,15 @@ class UsersTableSeeder extends Seeder
                 'attore_id' => 1,
                 'gas_id' => 4,
             ),
+            array (
+                'id' => 5,
+                'name' => 'Margherita Motta',
+                'email' => 'segreteria@desbri.org',
+                'password' => bcrypt('marghe'),
+                'ruolo' => 'gestore',
+                'attore_id' => null,
+                'gas_id' => null,
+            ),
         ));
         
         

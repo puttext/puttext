@@ -39,6 +39,16 @@ class User extends Authenticatable
 	public function gas(){
 		return $this->belongsTo('App\Model\Gas');
 	}
+
+	public function getFornaiAttribute(){
+	    if ($this->livello==User::COORDINATORE){
+    		return Fornaio::find(\Auth::user()->referenza->id);
+    	}
+    	elseif (\Auth::user()->livello>=User::GESTORE){
+    		return Fornaio::all();
+    	}
+    	else return [];
+	}
 	
 	public function getLivelloAttribute(){
 		switch ($this->ruolo){

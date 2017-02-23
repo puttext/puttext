@@ -11,29 +11,30 @@
 	       	<table class="table table-striped table-bordered table-condensed">
 	       		<thead>
 	       			<tr>
-	       				<th class="col-md-4">Descrizione</th>
+	       				<th class="col-md-3">Descrizione</th>
+	       				<th class="col-md-1">Fornitori</th>
+	       				<th class="col-md-4">Consegne</th>
 	       				<th class="col-md-1">Apertura</th>
 	       				<th class="col-md-1">Chiusura</th>
-	       				<th class="col-md-2">Fornitori</th>
-	       				<th class="col-md-4">Consegne</th>
-	       				<th class="col-md-1">Operazioni</th>
+	       				<th class="col-md-2">Operazioni</th>
 	       			</tr>
 	       		</thead>
 	       		<tbody>
 					@foreach ($prossimi as $gruppo)
 	       			<tr>
-	       				<td class="col-md4">{{ $gruppo["descrizione"] }}</td>
+	       				<td class="col-md3">{{ $gruppo["descrizione"] }}</td>
+	       				<td class="col-md1">{{ $gruppo["fornitori"] }}</td>
+	       				<td class="col-md4">{{ $gruppo["consegne"] }}</td>
 	       				<td class="col-md1">{{ $gruppo["apertura"] }}</td>
 	       				<td class="col-md1">{{ $gruppo["chiusura"] }}</td>
-	       				<td class="col-md2">{{ $gruppo["fornitori"] }}</td>
-	       				<td class="col-md4">{{ $gruppo["consegne"] }}</td>
-	       				<td class="col-md1">
-	       					<a class="btn btn-sm btn-success" href="{{ $gruppo['url'] }}">Modifica</a>
-	       					</td>
+	       				<td class="col-md2">
+	       					<a class="btn btn-xs btn-primary" href="{{ $gruppo['url_view'] }}">Riepilogo</a>
+	       					<a class="btn btn-xs btn-warning" href="{{ $gruppo['url_edit'] }}">Modifica</a>
+	       				</td>
 	       			</tr>
+	        		@endforeach
 	       		</tbody>
 	       	</table>
-	        @endforeach
 			</div>
 	    </div>
 	</div>

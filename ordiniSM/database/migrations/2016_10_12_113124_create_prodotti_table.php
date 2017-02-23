@@ -24,6 +24,7 @@ class CreateProdottiTable extends Migration {
 			$table->float('prezzo_fornitore');
 			$table->float('contributo_des');
 			$table->float('contributo_sm');
+			$table->integer('sort');
 			$table->timestamps();
 		});
 	}

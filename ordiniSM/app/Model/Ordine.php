@@ -20,6 +20,15 @@ class Ordine extends BaseModel
 	public function prodotti(){
 		return $this->hasMany('App\Model\Prodotto');
 	}
+
+	public function fornaio(){
+		if ($this->tipo="pane")
+			return $this->belongsTo('App\Model\Fornaio','fornitore_id');
+		else 
+			return null;
+	}
 	
-	
+	public function getNumProdottiAttribute(){
+		return $this->prodotti()->count();
+	}
 }

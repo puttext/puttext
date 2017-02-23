@@ -44,10 +44,11 @@ class OrdiniController extends Controller
     		$gruppo["consegne"]=implode($consegne,", ");
     		
     		if (substr($gruppo["codice_gruppo"],0,1)=="P")
-    			$gruppo["url"]=url('/ordini/pane/'.$ordini[0]->consegna->format("Y/m").'/edit');
+    			$gruppo["url_edit"]=url('/ordini/pane/'.$ordini[0]->consegna->format("Y/m").'/edit');
     		else
-    			$gruppo["url"]=url('/ordini/'.$gruppo['codice_gruppo'].'/edit');
-    		
+    			$gruppo["url_edit"]=url('/ordini/'.$gruppo['codice_gruppo'].'/edit');
+    		$gruppo["url_view"]=url('/ordini/'.$gruppo['codice_gruppo']);
+    			 
     		if ($ordini[0]->apertura>$oggi){
     			$this->dati["prossimi"][]=$gruppo;
     		}
@@ -90,14 +91,14 @@ class OrdiniController extends Controller
         	$mese=$request->input("mese");
         	$mese_f=sprintf('%02d',$mese);
         	$anno=$request->input("anno");
-        	$fornai=[];
-        	if (\Auth::user()->ruolo=="coordinatore"){
-        		$fornai[]=Fornaio::find(\Auth::user()->referenza->id);
-        	}
-        	elseif (\Auth::user()->ruolo=="admin"){
-        		$fornai=Fornaio::all();
-        	}
-    		//(new Dumper)->dump($appuntamento);
+    		$fornai=\Auth::user()->fornai;
+	    	/*if (\Auth::user()->livello==User::COORDINATORE){
+	    		$fornai[]=Fornaio::find(\Auth::user()->referenza->id);
+	    	}
+	    	elseif (\Auth::user()->livello>=User::GESTORE){
+	    		$fornai=Fornaio::all();
+	    	}*/
+        	//(new Dumper)->dump($appuntamento);
         	/*$dumper->dump($fornai);
         	$dumper->dump($mese);
         	$dumper->dump($anno);*/
@@ -156,7 +157,27 @@ class OrdiniController extends Controller
      */
     public function show($id)
     {
-        //
+    	$ordini=array();
+    	if (is_numeric($id)) {
+			//id numerico: ordine singolo
+			$ordini[]=Ordine::find($id);
+		}
+		else {
+			//id alfanumerico: ordine gruppo
+			$ordini=Ordine::whereCodiceGruppo($id)->orderBy("consegna")->get();
+				
+		}
+		if (count($ordini)>0){
+			if ($ordini[0]->tipo="pane"){
+				$fornaio=Fornaio::find($ordini[0]->fornitore_id);
+				$this->dati["elenco_gas"]=$ordini[0]->fornaio->gas()->whereGiorno(substr($id,4,1))->get();
+			}
+			else 
+				$this->dati["elenco_gas"]=Gas::all();
+		}
+		
+		$this->dati["ordini"]=$ordini;
+		return view("ordini.riepilogo")->with($this->dati);
     }
 
     /**
@@ -174,7 +195,8 @@ class OrdiniController extends Controller
 			else
 				return view("errors.generic")->with(["messaggio"=>"Nessun GAS di riferimento per cui compilare"]);
 		}
-		else {
+		elseif (is_numeric($id)) {
+			//id numerico: ordine singolo
 			$ordine=Ordine::find($id);
 			$oggi=new \Carbon\Carbon();
 			if ($ordine->apertura <= $oggi && $ordine->chiusura>=$oggi){
@@ -184,6 +206,9 @@ class OrdiniController extends Controller
 			if ($ordine->apertura < $oggi && \Auth::user()->livello >= 20){
 				//edit singolo ordine
 			}
+		}
+		else {
+			//id alfanumerico: ordine gruppo
 		}
     	
     }

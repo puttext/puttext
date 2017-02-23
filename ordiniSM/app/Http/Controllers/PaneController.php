@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Model\Fornaio;
 use App\Model\Ordine;
+use App\Model\User;
 
 class PaneController extends Controller
 {
@@ -16,13 +17,13 @@ class PaneController extends Controller
     	//dd(setlocale(LC_ALL, 0));
     	$mese=(int)$mese;
     	$mese_f=sprintf('%02d',$mese);
-    	$fornai=[];
-    	if (\Auth::user()->ruolo=="coordinatore"){
+    	$fornai=\Auth::user()->fornai;
+    	/*if (\Auth::user()->livello==User::COORDINATORE){
     		$fornai[]=Fornaio::find(\Auth::user()->referenza->id);
     	}
-    	elseif (\Auth::user()->ruolo=="admin"){
+    	elseif (\Auth::user()->livello>=User::GESTORE){
     		$fornai=Fornaio::all();
-    	}
+    	}*/
     	$date=array();
     	$index=0;
     	foreach ($fornai as $fornaio){
@@ -105,6 +106,6 @@ class PaneController extends Controller
 	        	]);
     		}
     	}
-		return redirect("ordini/pane/$anno/$mese/edit/");
+		return redirect("ordini/");
     }
 }
