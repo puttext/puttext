@@ -177,6 +177,7 @@ class OrdiniController extends Controller
 		}
 		
 		$this->dati["ordini"]=$ordini;
+		var_dump($ordini[0]->toArray(),$ordini[0]->prodotti[0]->getQuantitaGas(1));
 		return view("ordini.riepilogo")->with($this->dati);
     }
 
@@ -232,7 +233,7 @@ class OrdiniController extends Controller
     		//dd($prodotto,$dettaglio);
 			$dettaglio->save();
     	}
-		return redirect("ordini/current/edit/");
+		return redirect("ordini/current/edit/")->with("message","Ordine aggiornato");
     }
 
     /**
