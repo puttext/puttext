@@ -15,7 +15,7 @@
 	    </div>
 		<div class="panel-body">
 	       	<table class="table table-striped table-bordered table-condensed">
-	       		<thead>
+	       		<thead class="text-center">
 	       			<tr rowspan=2>
 	       				<th>G.A.S.</th>
 	       				@foreach ($ordini as $ordine)
@@ -37,7 +37,7 @@
 	       				<td class="col-md-4">{{  $gas->nome }}<br/>({{$gas->comune}})</td>
 	       				@foreach ($ordini as $ordine)
 	       					@foreach ($ordine->prodotti as $prodotto)
-	       						<td>{{ $prodotto->getQuantitaGas($gas->attore_id) }}</td>
+	       						<td class="text-center">{{ $prodotto->getQuantitaGas($gas->id) }}</td>
 	       					@endforeach
        					@endforeach
 	       			</tr>

@@ -177,7 +177,6 @@ class OrdiniController extends Controller
 		}
 		
 		$this->dati["ordini"]=$ordini;
-		var_dump($ordini[0]->toArray(),$ordini[0]->prodotti[0]->getQuantitaGas(1));
 		return view("ordini.riepilogo")->with($this->dati);
     }
 
