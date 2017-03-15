@@ -26,7 +26,7 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Cesano Maderno',
                 'ragione_sociale' => 'Il Piccolo Forno',
                 'indirizzo' => 'via Monte Rosa',
-                'created_at' => NULL,
+                'created_at' => new DateTime(),
                 'updated_at' => NULL,
             ),
             1 => 
@@ -38,7 +38,7 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Bellinzago Lombardo',
                 'ragione_sociale' => 'F.lli Colombo',
                 'indirizzo' => '',
-                'created_at' => NULL,
+                'created_at' => new DateTime(),
                 'updated_at' => NULL,
             ),
             2 => 
@@ -50,7 +50,7 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Seregno',
                 'ragione_sociale' => 'Il Pane di Franca',
                 'indirizzo' => 'via Tenca',
-                'created_at' => NULL,
+                'created_at' => new DateTime(),
                 'updated_at' => NULL,
             ),
             3 => 
@@ -62,7 +62,7 @@ class AttoriTableSeeder extends Seeder
                 'comune' => '',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => NULL,
+                'created_at' => new DateTime(),
                 'updated_at' => NULL,
             ),
             4 => 
@@ -74,7 +74,7 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Rovagnate',
                 'ragione_sociale' => 'C.na Bagaggera',
                 'indirizzo' => '',
-                'created_at' => NULL,
+                'created_at' => new DateTime(),
                 'updated_at' => NULL,
             ),
             5 => 
@@ -86,8 +86,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Cernusco Sul Naviglio',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             6 => 
             array (
@@ -98,8 +98,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Cassina De’ Pecchi',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             7 => 
             array (
@@ -110,8 +110,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Carate Brianza',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             8 => 
             array (
@@ -122,8 +122,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Carate Brianza',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             9 => 
             array (
@@ -134,8 +134,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Brugherio',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             10 => 
             array (
@@ -146,8 +146,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Biassono',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             11 => 
             array (
@@ -158,8 +158,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Basiano',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             12 => 
             array (
@@ -170,8 +170,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Barlassina',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             13 => 
             array (
@@ -182,8 +182,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Agrate Brianza',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             14 => 
             array (
@@ -194,8 +194,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Cesano Maderno',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             15 => 
             array (
@@ -206,8 +206,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Concorezzo-Vimercate',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             16 => 
             array (
@@ -218,8 +218,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Desio',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             17 => 
             array (
@@ -230,8 +230,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Gorgonzola',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             18 => 
             array (
@@ -242,8 +242,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Mezzago',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             19 => 
             array (
@@ -254,8 +254,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Monza',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             20 => 
             array (
@@ -266,8 +266,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Seveso',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             21 => 
             array (
@@ -278,8 +278,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Vedano',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             22 => 
             array (
@@ -290,8 +290,8 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Villasanta',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => '0000-00-00 00:00:00',
-                'updated_at' => '0000-00-00 00:00:00',
+                'created_at' => new DateTime(),
+                'updated_at' => null,
             ),
             23 => 
             array (
@@ -302,7 +302,7 @@ class AttoriTableSeeder extends Seeder
                 'comune' => 'Cornate D\'Adda',
                 'ragione_sociale' => '',
                 'indirizzo' => '',
-                'created_at' => NULL,
+                'created_at' => new DateTime(),
                 'updated_at' => NULL,
             ),
         ));
